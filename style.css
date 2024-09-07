@@ -1,0 +1,114 @@
+body {
+    font-family:  Arial, Helvetica, sans-serif ;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#main h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resume-container {
+    display: flex;
+    max-width: 850px;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+}
+
+.left-column {
+    width: 60%;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid blue;
+    border-right: none;
+}
+
+.right-column {
+    width: 40%;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+#profession{
+    color: #FF6A00;
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 2px solid #FF6A00;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.job, .project {
+    margin-bottom: 15px;
+}
+
+#toggleSkills {
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+#toggleSkills:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); 
+}
+
+#toggleSkills:active {
+    background-color: #003d7a; 
+    transform: scale(0.98); 
+}
+
+
+.skill-bar {
+    background-color: #ddd;
+    height: 10px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.skill-bar .bar {
+    background-color: #FF6A00;
+    height: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a img {
+    width: 25px;
+    margin: 10px;
+}
+
+#linkedin-badge {
+    margin-top: 20px;
+    text-align: center; 
+}
+
+.badge-base {
+    display: inline-block; 
+}
