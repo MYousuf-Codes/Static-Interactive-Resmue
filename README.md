@@ -1,2 +1,2 @@
 # Static-Interactive-Resmue
-Milestone 1: Static Interactive
+Milestone 1: Static Interactive Resume
