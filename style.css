@@ -6,12 +6,6 @@ body {
     color: #333;
 }
 
-#main h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .resume-container {
     display: flex;
     max-width: 850px;
@@ -112,3 +106,245 @@ a img {
 .badge-base {
     display: inline-block; 
 }
+
+/* General Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #222;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.logo .title {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.main-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu li {
+    margin-left: 20px;
+}
+
+.main-menu li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.main-menu li a:hover {
+    background-color: #555;
+}
+
+/* Form Container */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Resume Styles */
+.resume-container {
+    display: flex;
+    max-width: 850px;
+    margin: 20px auto;
+    background-color: white;
+    overflow: hidden;
+}
+
+.left-column {
+    width: 60%;
+    padding: 20px;
+    border-right: none;
+}
+
+.right-column {
+    width: 40%;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+h2 {
+    border-bottom: 2px solid #FF6A00;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+#toggleSkills {
+    padding: 5px 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggleSkills:hover {
+    background-color: #0056b3;
+}
+
+#downloadResume {
+    display: block;
+    margin: 20px auto;
+}
+
+/* Light/Dark Mode Toggle */
+.toggle-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.form-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: calc(100% - 100px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} 
+
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+    border: 2px solid red;
+}
+  
