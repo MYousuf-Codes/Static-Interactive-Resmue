@@ -6,6 +6,85 @@
     <title>Generate Your Resume</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    .resume {
+        font-family: Arial, sans-serif;
+    }
+    .left-column {
+        width: 100%;
+    }
+    #profile img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+    h2 {
+        position: relative;
+        padding-bottom: 10px;
+    }
+    h2::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #000;
+    }
+    .resume * {
+        border: none;
+    }
+    #linkedinBadge{
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    header {
+        background-color: #333;
+        color: white;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+</style>
 <body>
 
     <header>
@@ -26,46 +105,11 @@
 
         <div class="form-container">
             <form id="resumeForm">
+        </div>
+    </div>
                 
-                <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Generator</title>
-    <style>
-        .resume {
-            font-family: Arial, sans-serif;
-        }
-        .left-column {
-            width: 100%;
-        }
-        #profile img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-        h2 {
-            position: relative;
-            padding-bottom: 10px;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #000;
-        }
-        .resume * {
-            border: none;
-        }
-        #linkedinBadge{
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+ 
+    
 </head>
 <body>
     <form id="resumeForm">
