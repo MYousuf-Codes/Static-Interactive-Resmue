@@ -1,3 +1,16 @@
+document.addEventListener("DOMContentLoaded", function () {
+    var toggleSkillsButton = document.getElementById('toggleSkills');
+    var skillsSection = document.getElementById('skills');
+    
+    toggleSkillsButton.addEventListener('click', function () {
+        if (skillsSection.style.display === 'none' || skillsSection.style.display === '') {
+            skillsSection.style.display = 'block';
+        } else {
+            skillsSection.style.display = 'none';
+        }
+    });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('resumeForm').addEventListener('submit', (event) => {
         event.preventDefault();
