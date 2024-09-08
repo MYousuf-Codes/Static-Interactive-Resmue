@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Your Resume</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header">
+            <a href="index.html" class="logo">
+                <div class="title">Dynamic Resume Builder</div>
+            </a>
+            <ul class="main-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generateResume.html">Generate Your Resume</a></li>
+            </ul>
+        </div>
+    </header>
+
+        <div id="h1">
+            <h1 style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Milestone: 3</h1>
+            <p style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Dynamically Resume Builder With Form</p>
+        </div>
+
+        <div class="form-container">
+            <form id="resumeForm">
+                
+                <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <style>
+        .resume {
+            font-family: Arial, sans-serif;
+        }
+        .left-column {
+            width: 100%;
+        }
+        #profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        h2 {
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+        }
+        .resume * {
+            border: none;
+        }
+        #linkedinBadge{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <form id="resumeForm">
+        <input type="file" id="profileImage" />
+        <input type="text" id="name" placeholder="Name" />
+        <input type="text" id="profession" placeholder="Profession" />
+        <input type="email" id="email" placeholder="Email" />
+        <input type="tel" id="phone" placeholder="Phone" />
+        <textarea id="overview" placeholder="Career Overview"></textarea>
+        <textarea id="education" placeholder="Education"></textarea>
+        <textarea id="experience" placeholder="Experience"></textarea>
+        <textarea id="skills" placeholder="Skills"></textarea>
+        <textarea id="contact" placeholder="Contact Info"></textarea>
+        <input type="url" id="linkedin" placeholder="LinkedIn" />
+        <input type="url" id="github" placeholder="GitHub" />
+        <textarea id="projects" placeholder="Projects"></textarea>
+        <textarea id="certifications" placeholder="Certifications"></textarea>
+        <input type="url" id="twitter" placeholder="Twitter" />
+        <input type="url" id="instagram" placeholder="Instagram" />
+        <input type="url" id="stackoverflow" placeholder="Stack Overflow" />
+        <label>
+            <input type="checkbox" id="linkedinBadge" /> Include LinkedIn Badge
+        </label>
+        <button type="submit">Generate Resume</button>
+    </form>
+    <div id="resumeContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
