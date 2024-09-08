@@ -1,91 +1,32 @@
-// Import the necessary modules from jsPDF
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 
-// Ensure that all sections are editable and listen for changes
 document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll('[contenteditable=true]');
-    const downloadButton = document.getElementById('downloadResume');
-    const skillsSection = document.getElementById('skills');
-
-    sections.forEach((section) => {
-        section.addEventListener('blur', (event) => {
-            const target = event.target;
-            saveSectionChanges(target.id, target.innerHTML);
-        });
-    });
-
-    if (downloadButton) {
-        downloadButton.addEventListener('click', () => {
-            downloadResume();
-        });
-    }
-
-    // Handle possible null error for skillsSection
-    if (skillsSection) {
-        skillsSection.style.display = 'none'; // Example operation; adjust as needed
-    }
-});
-
-// Function to save changes made by the user
-function saveSectionChanges(id, content) {
-    // Save changes locally or send them to a server
-    localStorage.setItem(id, content); // Example: saving to local storage
-    console.log(`Section ${id} updated: ${content}`);
-}
-
-// Function to download the resume as a PDF
-function downloadResume() {
-    const resumeContainer = document.getElementById('resumeContainer');
-    const pdf = new jsPDF();
-
-    // Use the html2canvas library to capture the content of the resume container as an image
-    html2canvas(resumeContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
-
-        // Create a new PDF document and add the captured image to it
-        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-        pdf.save('resume.pdf');
-    });
-
-    // Use the new 'html' method from jsPDF to directly convert HTML to PDF
-    pdf.html(resumeContainer, {
-        callback: function (pdf) {
-            pdf.save('resume.pdf'); // Save the generated PDF
+    const toggleSections = (id) => {
+        const section = document.getElementById(id);
+        if (section) {
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
         }
-    });
-}
-
-// Function to toggle sections' visibility
-function toggleSections(id) {
-    const section = document.getElementById(id);
-    if (section) {
-        section.style.display = section.style.display === 'none' ? 'block' : 'none';
-    }
-}
+    };
+});
 
 // Elements
 const toggleSkillsButton = document.getElementById('toggleSkills');
 const skillsSection = document.getElementById('skills');
 
-// Event listener for toggling skills section
-if (toggleSkillsButton) {
-    toggleSkillsButton.addEventListener('click', () => {
-        if (skillsSection.style.display === 'none') {
-            skillsSection.style.display = 'block';
-        } else {
-            skillsSection.style.display = 'none';
-        }
-    });
-}
+// Event listener
+toggleSkillsButton?.addEventListener('click', () => {
+    if (skillsSection?.style.display === 'none') {
+        skillsSection.style.display = 'block';
+    } else {
+        skillsSection.style.display = 'none';
+    }
+});
 
-// Form submission handler
 document.getElementById('resumeForm')?.addEventListener('submit', (event) => {
     event.preventDefault();
     generateResume();
 });
 
-// Function to generate the resume
 function generateResume() {
     const profileImageInput = document.getElementById('profileImage');
     const profileImage = profileImageInput.files?.[0];
@@ -195,126 +136,16 @@ function generateResume() {
             </body>
             </html>
         `;
+        const newWindow = window.open();
+        newWindow?.document.write(resumeTemplate);
+        newWindow?.document.close();
 
-        // Here you can use the resumeTemplate to create a PDF or display it
+        // Generate PDF
+        const pdf = new jsPDF();
+        pdf.fromHTML(resumeTemplate, 10, 10);
+        pdf.save('resume.pdf');
     };
-
     if (profileImage) {
         reader.readAsDataURL(profileImage);
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll('[contenteditable=true]');
-        const downloadButton = document.getElementById('downloadResume');
-    
-        sections.forEach((section) => {
-            section.addEventListener('blur', (event) => {
-                const target = event.target;
-                saveSectionChanges(target.id, target.innerHTML);
-            });
-        });
-    
-        if (downloadButton) {
-            downloadButton.addEventListener('click', () => {
-                downloadResume();
-            });
-        }
-    });
-    
-    // Function to save changes made by the user
-    function saveSectionChanges(id, content) {
-        // Save changes locally or send them to a server
-        localStorage.setItem(id, content); // Example: saving to local storage
-        console.log(`Section ${id} updated: ${content}`);
-    }
-    
-    // Function to download the resume as a PDF
-    function downloadResume() {
-        const resumeContainer = document.getElementById('resumeContainer');
-        const pdf = new jsPDF();
-    
-        // Use the html2canvas library to capture the content of the resume container as an image
-        html2canvas(resumeContainer).then(canvas => {
-            const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
-    
-            // Create a new PDF document and add the captured image to it
-            pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-            pdf.save('resume.pdf');
-        });
-    
-        // Use the new 'html' method from jsPDF to directly convert HTML to PDF
-        pdf.html(resumeContainer, {
-            callback: function (pdf) {
-                pdf.save('resume.pdf'); // Save the generated PDF
-            }
-        });
-    }
-    
-    // Form submission handler
-    document.getElementById('resumeForm')?.addEventListener('submit', (event) => {
-        event.preventDefault();
-        generateResume();
-    });
-    
-    // Function to generate the resume
-    function generateResume() {
-        // Gather the content from contenteditable sections
-        const overview = document.getElementById('overviewSection').innerHTML;
-        const linkedin = document.getElementById('linkedin').innerText;
-        const github = document.getElementById('github').innerText;
-        const twitter = document.getElementById('twitter').innerText;
-        const instagram = document.getElementById('instagram').innerText;
-        const stackoverflow = document.getElementById('stackoverflow').innerText;
-    
-        // Generate resume content (as HTML or another format)
-        const resumeTemplate = `
-            <html>
-            <head>
-                <style>
-                    .resume {
-                        font-family: Arial, sans-serif;
-                    }
-                    .left-column {
-                        width: 100%;
-                    }
-                    h2 {
-                        color: #FF6A00;
-                        position: relative;
-                        padding-bottom: 10px;
-                    }
-                    h2::after {
-                        content: '';
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        width: 100%;
-                        height: 2px;
-                        background-color: #000;
-                    }
-                    .resume * {
-                        border: none;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="resume">
-                    <div class="left-column">
-                        <section id="overview">
-                            <h2>Career Overview</h2>
-                            ${overview}
-                        </section>
-                        <section id="social">
-                            <h2>Social Links</h2>
-                            <p>LinkedIn: ${linkedin}</p>
-                            <p>GitHub: ${github}</p>
-                            <p>Twitter: ${twitter}</p>
-                            <p>Instagram: ${instagram}</p>
-                            <p>Stack Overflow: ${stackoverflow}</p>
-                        </section>
-                    </div>
-                </div>
-            </body>
-            </html>
-        `;
-}
 }
