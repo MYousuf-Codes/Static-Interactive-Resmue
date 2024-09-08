@@ -348,3 +348,15 @@ button:hover {
     border: 2px solid red;
 }
   
+/* Styling for the resume sections */
+[contenteditable="true"] {
+    border: 1px dashed #ccc;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+[contenteditable="true"]:focus {
+    border: 1px solid #333;
+    background-color: #f0f0f0;
+    outline: none;
+}
