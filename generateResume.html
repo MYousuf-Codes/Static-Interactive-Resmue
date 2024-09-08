@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="header">
             <a href="index.html" class="logo">
@@ -20,80 +19,93 @@
         </div>
     </header>
 
-        <div id="h1">
-            <h1 style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Milestone: 3</h1>
-            <p style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Dynamically Resume Builder With Form</p>
-        </div>
+    <div id="h1">
+        <h1 style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Milestone: 4</h1>
+        <p style="align-items: center; display: flex; justify-content: center; font-variant: small-caps;">Editable Resume Builder</p>
+    </div>
 
-        <div class="form-container">
-            <form id="resumeForm">
-                
-                <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Generator</title>
-    <style>
-        .resume {
-            font-family: Arial, sans-serif;
-        }
-        .left-column {
-            width: 100%;
-        }
-        #profile img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-        h2 {
-            position: relative;
-            padding-bottom: 10px;
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #000;
-        }
-        .resume * {
-            border: none;
-        }
-        #linkedinBadge{
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-</head>
-<body>
-    <form id="resumeForm">
-        <input type="file" id="profileImage" />
-        <input type="text" id="name" placeholder="Name" />
-        <input type="text" id="profession" placeholder="Profession" />
-        <input type="email" id="email" placeholder="Email" />
-        <input type="tel" id="phone" placeholder="Phone" />
-        <textarea id="overview" placeholder="Career Overview"></textarea>
-        <textarea id="education" placeholder="Education"></textarea>
-        <textarea id="experience" placeholder="Experience"></textarea>
-        <textarea id="skills" placeholder="Skills"></textarea>
-        <textarea id="contact" placeholder="Contact Info"></textarea>
-        <input type="url" id="linkedin" placeholder="LinkedIn" />
-        <input type="url" id="github" placeholder="GitHub" />
-        <textarea id="projects" placeholder="Projects"></textarea>
-        <textarea id="certifications" placeholder="Certifications"></textarea>
-        <input type="url" id="twitter" placeholder="Twitter" />
-        <input type="url" id="instagram" placeholder="Instagram" />
-        <input type="url" id="stackoverflow" placeholder="Stack Overflow" />
-        <label>
-            <input type="checkbox" id="linkedinBadge" /> Include LinkedIn Badge
-        </label>
-        <button type="submit">Generate Resume</button>
-    </form>
-    <div id="resumeContainer"></div>
+    <div class="form-container">
+        <form id="resumeForm">
+            <!-- Input fields for resume creation -->
+            <input type="file" id="profileImage" />
+            <input type="text" id="name" placeholder="Name" />
+            <input type="text" id="profession" placeholder="Profession" />
+            <input type="email" id="email" placeholder="Email" />
+            <input type="tel" id="phone" placeholder="Phone" />
+            <textarea id="overview" placeholder="Career Overview"></textarea>
+            <textarea id="education" placeholder="Education"></textarea>
+            <textarea id="experience" placeholder="Experience"></textarea>
+            <textarea id="skills" placeholder="Skills"></textarea>
+            <textarea id="contact" placeholder="Contact Info"></textarea>
+            <input type="url" id="linkedin" placeholder="LinkedIn" />
+            <input type="url" id="github" placeholder="GitHub" />
+            <textarea id="projects" placeholder="Projects"></textarea>
+            <textarea id="certifications" placeholder="Certifications"></textarea>
+            <input type="url" id="twitter" placeholder="Twitter" />
+            <input type="url" id="instagram" placeholder="Instagram" />
+            <input type="url" id="stackoverflow" placeholder="Stack Overflow" />
+            
+            <button type="submit">Generate Resume</button>
+        </form>
+    </div>
+            <h1 style="display: flex; align-items: center; justify-content: center; ">Edit & Donwloa You Resume here </h1>
+    <div id="resumeContainer">
+        <!-- Editable sections of the generated resume -->
+        <section id="profile" contenteditable="true">
+            <h1 contenteditable="true">John Doe</h1>
+            <p contenteditable="true" id="profession"><b>Software Engineer</b></p>
+        </section>
+        <br>
+        <section id="overviewSection" contenteditable="true">
+            <h2>Career Overview</h2>
+            <p>Enter your career overview here...</p>
+        </section>
+        <br>
+        <section id="education" contenteditable="true">
+            <h2>Education</h2>
+            <p>University of Example - Bachelor's Degree in Computer Science</p>
+        </section>
+        <br>
+        <section id="experience" contenteditable="true">
+            <h2>Experience</h2>
+            <p>Software Developer at XYZ Corp</p>
+        </section>
+        <br>
+        <section id="skills" contenteditable="true">
+            <h2>Skills</h2>
+            <p>HTML, CSS, TS/JS</p>
+        </section>
+        <br>
+        <section id="projects" contenteditable="true">
+            <h2>Projects</h2>
+            <p>E-commerce</p>
+            <p>Chat App</p>
+        </section>
+        <br>
+        <section id="certifications" contenteditable="true">
+            <h2>Certificates</h2>
+            <p>AWS, XYZ</p>
+        </section>
+        <br>
+        <section id="socialLinks">
+            <h2>Social Links</h2>
+            <div id="linkedin" contenteditable="true" placeholder="LinkedIn URL">Enter LinkedIn URL here...</div>
+            <div id="github" contenteditable="true" placeholder="GitHub URL">Enter GitHub URL here...</div>
+            <div id="twitter" contenteditable="true" placeholder="Twitter URL">Enter Twitter URL here...</div>
+            <div id="instagram" contenteditable="true" placeholder="Instagram URL">Enter Instagram URL here...</div>
+            <div id="stackoverflow" contenteditable="true" placeholder="Stack Overflow URL">Enter Stack Overflow URL here...</div>
+        </section>
+
+        <!-- Repeat for other sections like Skills, Projects, Certifications, etc. -->
+    </div>
+
+     <!-- Download Button -->
+     <button id="downloadResume">Download Resume</button>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <script src="script.js"></script>
+    <!-- <script src="script.ts"></script> -->
 </body>
 </html>
