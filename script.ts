@@ -1,3 +1,61 @@
+// Import the necessary modules from jsPDF
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas"; // Correct import of html2canvas
+
+// Ensure that all sections are editable and listen for changes
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll('[contenteditable=true]') as NodeListOf<HTMLElement>;
+    const downloadButton = document.getElementById('downloadResume') as HTMLButtonElement;
+    const skillsSection = document.getElementById('skills') as HTMLElement | null;
+
+    sections.forEach((section: HTMLElement) => {
+        section.addEventListener('blur', (event: Event) => {
+            const target = event.target as HTMLElement;
+            saveSectionChanges(target.id, target.innerHTML);
+        });
+    });
+
+    if (downloadButton) {
+        downloadButton.addEventListener('click', () => {
+            downloadResume();
+        });
+    }
+
+    // Handle possible null error for skillsSection
+    if (skillsSection) {
+        skillsSection.style.display = 'none'; // Example operation; adjust as needed
+    }
+});
+
+// Function to save changes made by the user
+function saveSectionChanges(id: string, content: string): void {
+    // Save changes locally or send them to a server
+    localStorage.setItem(id, content); // Example: saving to local storage
+    console.log(`Section ${id} updated: ${content}`);
+}
+
+// Function to download the resume as a PDF
+function downloadResume(): void {
+    const resumeContainer = document.getElementById('resumeContainer') as HTMLElement;
+    const pdf = new jsPDF();
+
+    // Use the html2canvas library to capture the content of the resume container as an image
+    html2canvas(resumeContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
+
+        // Create a new PDF document and add the captured image to it
+        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+        pdf.save('resume.pdf');
+    });
+
+    // Use the new 'html' method from jsPDF to directly convert HTML to PDF
+    pdf.html(resumeContainer, {
+        callback: function (pdf) {
+            pdf.save('resume.pdf'); // Save the generated PDF
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const toggleSections = (id: string) => {
         const section = document.getElementById(id);
@@ -12,13 +70,13 @@ const toggleSkillsButton = document.getElementById('toggleSkills') as HTMLButton
 const skillsSection = document.getElementById('skills') as HTMLElement | null;
 
 // Event listener
-toggleSkillsButton?.addEventListener('click', () => {
-    if (skillsSection?.style.display === 'none') {
-        skillsSection.style.display = 'block';
-    } else {
-        skillsSection.style.display = 'none';
-    }
-});
+// toggleSkillsButton?.addEventListener('click', () => {
+//     if (skillsSection?.style.display === 'none') {
+//         skillsSection.style.display = 'block';
+//     } else {
+//         skillsSection.style.display = 'none';
+//     }
+// });
 
 document.getElementById('resumeForm')?.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -133,12 +191,4 @@ function generateResume() {
                 </div>
             </body>
             </html>
-        `;
-        const newWindow = window.open();
-        newWindow?.document.write(resumeTemplate);
-        newWindow?.document.close();
-    };
-    if (profileImage) {
-        reader.readAsDataURL(profileImage);
-    }
-}
+        `}};
