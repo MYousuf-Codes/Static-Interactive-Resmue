@@ -107,43 +107,29 @@
                    
 </head>
 <body>
-    <form id="resumeForm">
-                <label for="profilePicture">Profile Picture (required):</label>
-                <input type="file" id="profilePicture" accept="image/*" required>
-          
-                <label for="name">Name (required):</label>
-                <input type="text" id="name" required>
-          
-                <label for="profession">Profession (required):</label>
-                <input type="text" id="profession" required>
-          
-                <label for="careerOverview">Career Overview (required):</label>
-                <textarea id="careerOverview" rows="5" required></textarea>
-          
-                <label for="email">Email (required):</label>
-                <input type="email" id="email" required>
-          
-                <label for="phone">Phone (required, numbers only):</label>
-                <input type="text" id="phone" maxlength="15" required>
-          
-                <label for="education">Education (required):</label>
-                <textarea id="education" rows="5" required></textarea>
-          
-                <label for="skills">Skills (required):</label>
-                <textarea id="skills" rows="5" required></textarea>
-          
-                <!-- Optional fields -->
-                <label for="projects">Projects (optional):</label>
-                <textarea id="projects" rows="5"></textarea>
-          
-                <label for="certifications">Certifications (optional):</label>
-                <textarea id="certifications" rows="5"></textarea>
-          
-                <label for="address">Address (optional):</label>
-                <textarea id="address" rows="5"></textarea>
-          
-                <button type="submit">Generate Resume</button>
-              </form>
+   <form id="resumeForm">
+        <input type="file" id="profileImage" />
+        <input type="text" id="name" placeholder="Name" />
+        <input type="text" id="profession" placeholder="Profession" />
+        <input type="email" id="email" placeholder="Email" />
+        <input type="tel" id="phone" placeholder="Phone" />
+        <textarea id="overview" placeholder="Career Overview"></textarea>
+        <textarea id="education" placeholder="Education"></textarea>
+        <textarea id="experience" placeholder="Experience"></textarea>
+        <textarea id="skills" placeholder="Skills"></textarea>
+        <textarea id="contact" placeholder="Contact Info"></textarea>
+        <input type="url" id="linkedin" placeholder="LinkedIn" />
+        <input type="url" id="github" placeholder="GitHub" />
+        <textarea id="projects" placeholder="Projects"></textarea>
+        <textarea id="certifications" placeholder="Certifications"></textarea>
+        <input type="url" id="twitter" placeholder="Twitter" />
+        <input type="url" id="instagram" placeholder="Instagram" />
+        <input type="url" id="stackoverflow" placeholder="Stack Overflow" />
+        <label>
+            <input type="checkbox" id="linkedinBadge" /> Include LinkedIn Badge
+        </label>
+        <button type="submit">Generate Resume</button>
+    </form>
     <div id="resumeContainer"></div>
 
     <script src="script.js"></script>
