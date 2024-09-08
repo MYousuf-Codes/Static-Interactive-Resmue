@@ -1,57 +1,320 @@
-var _a;
-document.addEventListener("DOMContentLoaded", function () {
-    var toggleSections = function (id) {
-        var section = document.getElementById(id);
-        if (section) {
-            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+// Import the necessary modules from jsPDF
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
+// Ensure that all sections are editable and listen for changes
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll('[contenteditable=true]');
+    const downloadButton = document.getElementById('downloadResume');
+    const skillsSection = document.getElementById('skills');
+
+    sections.forEach((section) => {
+        section.addEventListener('blur', (event) => {
+            const target = event.target;
+            saveSectionChanges(target.id, target.innerHTML);
+        });
+    });
+
+    if (downloadButton) {
+        downloadButton.addEventListener('click', () => {
+            downloadResume();
+        });
+    }
+
+    // Handle possible null error for skillsSection
+    if (skillsSection) {
+        skillsSection.style.display = 'none'; // Example operation; adjust as needed
+    }
+});
+
+// Function to save changes made by the user
+function saveSectionChanges(id, content) {
+    // Save changes locally or send them to a server
+    localStorage.setItem(id, content); // Example: saving to local storage
+    console.log(`Section ${id} updated: ${content}`);
+}
+
+// Function to download the resume as a PDF
+function downloadResume() {
+    const resumeContainer = document.getElementById('resumeContainer');
+    const pdf = new jsPDF();
+
+    // Use the html2canvas library to capture the content of the resume container as an image
+    html2canvas(resumeContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
+
+        // Create a new PDF document and add the captured image to it
+        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+        pdf.save('resume.pdf');
+    });
+
+    // Use the new 'html' method from jsPDF to directly convert HTML to PDF
+    pdf.html(resumeContainer, {
+        callback: function (pdf) {
+            pdf.save('resume.pdf'); // Save the generated PDF
         }
-    };
-});
+    });
+}
+
+// Function to toggle sections' visibility
+function toggleSections(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
 // Elements
-var toggleSkillsButton = document.getElementById('toggleSkills');
-var skillsSection = document.getElementById('skills');
-// Event listener
-toggleSkillsButton === null || toggleSkillsButton === void 0 ? void 0 : toggleSkillsButton.addEventListener('click', function () {
-    if ((skillsSection === null || skillsSection === void 0 ? void 0 : skillsSection.style.display) === 'none') {
-        skillsSection.style.display = 'block';
-    }
-    else {
-        skillsSection.style.display = 'none';
-    }
-});
-(_a = document.getElementById('resumeForm')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', function (event) {
+const toggleSkillsButton = document.getElementById('toggleSkills');
+const skillsSection = document.getElementById('skills');
+
+// Event listener for toggling skills section
+if (toggleSkillsButton) {
+    toggleSkillsButton.addEventListener('click', () => {
+        if (skillsSection.style.display === 'none') {
+            skillsSection.style.display = 'block';
+        } else {
+            skillsSection.style.display = 'none';
+        }
+    });
+}
+
+// Form submission handler
+document.getElementById('resumeForm')?.addEventListener('submit', (event) => {
     event.preventDefault();
     generateResume();
 });
+
+// Function to generate the resume
 function generateResume() {
-    var _a;
-    var profileImageInput = document.getElementById('profileImage');
-    var profileImage = (_a = profileImageInput.files) === null || _a === void 0 ? void 0 : _a[0];
-    var name = document.getElementById('name').value;
-    var profession = document.getElementById('profession').value;
-    var email = document.getElementById('email').value;
-    var phone = document.getElementById('phone').value;
-    var overview = document.getElementById('overview').value;
-    var education = document.getElementById('education').value;
-    var experience = document.getElementById('experience').value;
-    var skills = document.getElementById('skills').value;
-    var contact = document.getElementById('contact').value;
-    var linkedin = document.getElementById('linkedin').value;
-    var github = document.getElementById('github').value;
-    var projects = document.getElementById('projects').value;
-    var certifications = document.getElementById('certifications').value;
-    var twitter = document.getElementById('twitter').value;
-    var instagram = document.getElementById('instagram').value;
-    var stackoverflow = document.getElementById('stackoverflow').value;
-    var linkedinBadge = document.getElementById('linkedinBadge').checked;
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        var resumeTemplate = "\n            <html>\n            <head>\n                <style>\n                    .resume {\n                        font-family: Arial, sans-serif;\n                    }\n                    .left-column {\n                        width: 100%;\n                    }\n                    #profile img {\n                        width: 150px;\n                        height: 150px;\n                        border-radius: 50%;\n                        display: flex;\n                        text-align: center;\n                        justify-content: center;\n                    }\n                    h2 {\n                        color: #FF6A00;\n                        position: relative;\n                        padding-bottom: 10px;\n                    }\n                    h2::after {\n                        content: '';\n                        position: absolute;\n                        left: 0;\n                        bottom: 0;\n                        width: 100%;\n                        height: 2px;\n                        background-color: #000;\n                    }\n                    .resume * {\n                        border: none;\n                    }\n                </style>\n            </head>\n            <body>\n                <div class=\"resume\">\n                    <div class=\"left-column\">\n                        <section id=\"profile\">\n                            <img src=\"".concat(e.target.result, "\" class=\"profile-pic\">\n                            <h1>").concat(name, "</h1>\n                            <p id=\"profession\"><b>").concat(profession, "</b></p>\n                        </section>\n                        <section id=\"summary\">\n                            ").concat(overview, "\n                        </section>\n                        <section id=\"education\">\n                            <h2>Education</h2>\n                            ").concat(education, "\n                        </section>\n                        <section id=\"experience\">\n                            <h2>Experience</h2>\n                            ").concat(experience, "\n                        </section>\n                        <section id=\"skills\">\n                            <h2>Skills</h2>\n                            ").concat(skills, "\n                        </section>\n                        <section id=\"contact\">\n                            <h2>Contact Info</h2>\n                            <p>").concat(contact, "</p>\n                            <p>LinkedIn: <a href=\"").concat(linkedin, "\">").concat(linkedin, "</a></p>\n                            <p>GitHub: <a href=\"").concat(github, "\">").concat(github, "</a></p>\n                        </section>\n                        <section id=\"projects\">\n                            <h2>Projects</h2>\n                            ").concat(projects, "\n                        </section>\n                        <section id=\"certifications\">\n                            <h2>Certifications</h2>\n                            ").concat(certifications, "\n                        </section>\n                        <section id=\"social\">\n                            <h2>Social Links</h2>\n                            <p>Twitter: <a href=\"").concat(twitter, "\">").concat(twitter, "</a></p>\n                            <p>Instagram: <a href=\"").concat(instagram, "\">").concat(instagram, "</a></p>\n                            <p>Stack Overflow: <a href=\"").concat(stackoverflow, "\">").concat(stackoverflow, "</a></p>\n                            ").concat(linkedinBadge ? '<p>LinkedIn Badge: Included</p>' : '', "\n                        </section>\n                    </div>\n                </div>\n            </body>\n            </html>\n        ");
-        var newWindow = window.open();
-        newWindow === null || newWindow === void 0 ? void 0 : newWindow.document.write(resumeTemplate);
-        newWindow === null || newWindow === void 0 ? void 0 : newWindow.document.close();
+    const profileImageInput = document.getElementById('profileImage');
+    const profileImage = profileImageInput.files?.[0];
+    const name = document.getElementById('name').value;
+    const profession = document.getElementById('profession').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const overview = document.getElementById('overview').value;
+    const education = document.getElementById('education').value;
+    const experience = document.getElementById('experience').value;
+    const skills = document.getElementById('skills').value;
+    const contact = document.getElementById('contact').value;
+    const linkedin = document.getElementById('linkedin').value;
+    const github = document.getElementById('github').value;
+    const projects = document.getElementById('projects').value;
+    const certifications = document.getElementById('certifications').value;
+    const twitter = document.getElementById('twitter').value;
+    const instagram = document.getElementById('instagram').value;
+    const stackoverflow = document.getElementById('stackoverflow').value;
+    const linkedinBadge = document.getElementById('linkedinBadge').checked;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const resumeTemplate = `
+            <html>
+            <head>
+                <style>
+                    .resume {
+                        font-family: Arial, sans-serif;
+                    }
+                    .left-column {
+                        width: 100%;
+                    }
+                    #profile img {
+                        width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        display: flex;
+                        text-align: center;
+                        justify-content: center;
+                    }
+                    h2 {
+                        color: #FF6A00;
+                        position: relative;
+                        padding-bottom: 10px;
+                    }
+                    h2::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        height: 2px;
+                        background-color: #000;
+                    }
+                    .resume * {
+                        border: none;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="resume">
+                    <div class="left-column">
+                        <section id="profile">
+                            <img src="${e.target.result}" class="profile-pic">
+                            <h1>${name}</h1>
+                            <p id="profession"><b>${profession}</b></p>
+                        </section>
+                        <section id="summary">
+                            ${overview}
+                        </section>
+                        <section id="education">
+                            <h2>Education</h2>
+                            ${education}
+                        </section>
+                        <section id="experience">
+                            <h2>Experience</h2>
+                            ${experience}
+                        </section>
+                        <section id="skills">
+                            <h2>Skills</h2>
+                            ${skills}
+                        </section>
+                        <section id="contact">
+                            <h2>Contact Info</h2>
+                            <p>${contact}</p>
+                            <p>LinkedIn: <a href="${linkedin}">${linkedin}</a></p>
+                            <p>GitHub: <a href="${github}">${github}</a></p>
+                        </section>
+                        <section id="projects">
+                            <h2>Projects</h2>
+                            ${projects}
+                        </section>
+                        <section id="certifications">
+                            <h2>Certifications</h2>
+                            ${certifications}
+                        </section>
+                        <section id="social">
+                            <h2>Social Links</h2>
+                            <p>Twitter: <a href="${twitter}">${twitter}</a></p>
+                            <p>Instagram: <a href="${instagram}">${instagram}</a></p>
+                            <p>Stack Overflow: <a href="${stackoverflow}">${stackoverflow}</a></p>
+                            ${linkedinBadge ? '<p>LinkedIn Badge: Included</p>' : ''}
+                        </section>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+
+        // Here you can use the resumeTemplate to create a PDF or display it
     };
+
     if (profileImage) {
         reader.readAsDataURL(profileImage);
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll('[contenteditable=true]');
+        const downloadButton = document.getElementById('downloadResume');
+    
+        sections.forEach((section) => {
+            section.addEventListener('blur', (event) => {
+                const target = event.target;
+                saveSectionChanges(target.id, target.innerHTML);
+            });
+        });
+    
+        if (downloadButton) {
+            downloadButton.addEventListener('click', () => {
+                downloadResume();
+            });
+        }
+    });
+    
+    // Function to save changes made by the user
+    function saveSectionChanges(id, content) {
+        // Save changes locally or send them to a server
+        localStorage.setItem(id, content); // Example: saving to local storage
+        console.log(`Section ${id} updated: ${content}`);
+    }
+    
+    // Function to download the resume as a PDF
+    function downloadResume() {
+        const resumeContainer = document.getElementById('resumeContainer');
+        const pdf = new jsPDF();
+    
+        // Use the html2canvas library to capture the content of the resume container as an image
+        html2canvas(resumeContainer).then(canvas => {
+            const imgData = canvas.toDataURL('image/png'); // Convert canvas to image data
+    
+            // Create a new PDF document and add the captured image to it
+            pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+            pdf.save('resume.pdf');
+        });
+    
+        // Use the new 'html' method from jsPDF to directly convert HTML to PDF
+        pdf.html(resumeContainer, {
+            callback: function (pdf) {
+                pdf.save('resume.pdf'); // Save the generated PDF
+            }
+        });
+    }
+    
+    // Form submission handler
+    document.getElementById('resumeForm')?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        generateResume();
+    });
+    
+    // Function to generate the resume
+    function generateResume() {
+        // Gather the content from contenteditable sections
+        const overview = document.getElementById('overviewSection').innerHTML;
+        const linkedin = document.getElementById('linkedin').innerText;
+        const github = document.getElementById('github').innerText;
+        const twitter = document.getElementById('twitter').innerText;
+        const instagram = document.getElementById('instagram').innerText;
+        const stackoverflow = document.getElementById('stackoverflow').innerText;
+    
+        // Generate resume content (as HTML or another format)
+        const resumeTemplate = `
+            <html>
+            <head>
+                <style>
+                    .resume {
+                        font-family: Arial, sans-serif;
+                    }
+                    .left-column {
+                        width: 100%;
+                    }
+                    h2 {
+                        color: #FF6A00;
+                        position: relative;
+                        padding-bottom: 10px;
+                    }
+                    h2::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        height: 2px;
+                        background-color: #000;
+                    }
+                    .resume * {
+                        border: none;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="resume">
+                    <div class="left-column">
+                        <section id="overview">
+                            <h2>Career Overview</h2>
+                            ${overview}
+                        </section>
+                        <section id="social">
+                            <h2>Social Links</h2>
+                            <p>LinkedIn: ${linkedin}</p>
+                            <p>GitHub: ${github}</p>
+                            <p>Twitter: ${twitter}</p>
+                            <p>Instagram: ${instagram}</p>
+                            <p>Stack Overflow: ${stackoverflow}</p>
+                        </section>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+}
 }
